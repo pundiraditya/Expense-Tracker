@@ -4,7 +4,9 @@ const expenseRoutes = require('./routes/expenses');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*'
+}));
 app.use(express.json());
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
